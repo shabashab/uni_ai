@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ChatSection: typeof import('./components/ChatSection.vue')['default']
     InputSection: typeof import('./components/InputSection.vue')['default']
   }
 }
