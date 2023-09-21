@@ -2,7 +2,9 @@
 </script>
 
 <template>
-  <div></div>
+  <div>
+    <h1>Hello AI</h1>
+  </div>
 </template>
 
 <style scoped>
