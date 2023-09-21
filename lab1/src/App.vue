@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div>
+  <div class="container">
     <h1>Hello AI</h1>
   </div>
 </template>
