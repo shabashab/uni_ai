@@ -15,7 +15,6 @@ const newMessageValue = computed({
     emit("update:newMessage", value)
   }
 })
-
 </script>
 
 <template>
