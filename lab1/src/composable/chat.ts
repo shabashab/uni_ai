@@ -58,7 +58,7 @@ export const useChat = (config: ChatConfig = { rules: CHAT_RULES }) => {
 
     if(suitableRules.length === 0) {
       messages.value.push({
-        message: 'Hello! I don\'t know how to respond to this',
+        message: 'Em?... I\'m not in mood to answer these kinds of things... Maybe you should ask your best friend instead, if you have one...',
         sender: 'ai'
       })
 

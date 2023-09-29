@@ -1,7 +1,5 @@
 <script setup lang="ts">
-const {messages, sendMessage} = useChat();
-
-sendMessage("Test");
+const { messages, sendMessage } = useChat();
 
 const newMessage = ref<string>("");
 

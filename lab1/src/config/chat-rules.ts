@@ -12,8 +12,8 @@ export const CHAT_RULES: ChatRule[] = [
   {
     condition: (input) => input.toLowerCase().startsWith('who'),
     response: [
-      'Not me! I promise', 
-      'HAHA! It was me!!!', 
+      'Not me! I promise',
+      'HAHA! It was me!!!',
       'I\'m certainly not the one you are looking for...'
     ]
   },
@@ -196,12 +196,12 @@ export const CHAT_RULES: ChatRule[] = [
       return "I'm not sure how you're feeling, but I'm here to chat!";
     },
   },
-  {
-    condition: /tell me more about (your|yourself)/i,
-    response: (input) => {
-      return "I'm a chatbot designed to have conversations on various topics, including programming and technology. Feel free to ask me anything!";
-    },
-  },
+  // {
+  //   condition: /tell me more about (your|yourself)/i,
+  //   response: (_input) => {
+  //     return "I'm a chatbot designed to have conversations on various topics, including programming and technology. Feel free to ask me anything!";
+  //   },
+  // },
   {
     condition: /(can you|how do you) (help|assist) with (\w+)/i,
     response: (input) => {
@@ -222,12 +222,12 @@ export const CHAT_RULES: ChatRule[] = [
       return "It's nice to know more about you. What do you enjoy doing?";
     },
   },
-  {
-    condition: /(tell me|what can you) (you|the bot) do/i,
-    response: (input) => {
-      return "I can chat with you on various topics, answer questions, and provide information on a wide range of subjects. Feel free to ask me anything!";
-    },
-  },
+  // {
+  //   condition: /(tell me|what can you) (you|the bot) do/i,
+  //   response: (_input) => {
+  //     return "I can chat with you on various topics, answer questions, and provide information on a wide range of subjects. Feel free to ask me anything!";
+  //   },
+  // },
   {
     condition: /tell me a programming joke/i,
     response: [
@@ -241,7 +241,7 @@ export const CHAT_RULES: ChatRule[] = [
   },
   {
     condition: /What's your favorite programming language\?/i,
-    response: "I'm a chatbot, so I don't have personal preferences, but I can help with many programming languages!",
+    response: "I can help with many programming languages! But don't know many...",
   },
   {
     condition: /explain the concept of recursion/i,
@@ -284,16 +284,16 @@ export const CHAT_RULES: ChatRule[] = [
       return "It's interesting to know you have experience. Can you share more about it?";
     },
   },
-  {
-    condition: /(?:What|Can you) (you|the bot) (tell me|explain) (about|regarding) (\w+)/i,
-    response: (input) => {
-      const match = input.match(/(?:What|Can you) (you|the bot) (tell me|explain) (about|regarding) (\w+)/i);
-      if (match && match[5]) {
-        return `Sure! I can provide information about ${match[5]}. What specific details are you looking for?`;
-      }
-      return "I'm here to help with various topics. Could you specify what you'd like to know more about?";
-    },
-  },
+  // {
+  //   condition: /(?:What|Can you) (you|the bot) (tell me|explain) (about|regarding) (\w+)/i,
+  //   response: (input) => {
+  //     const match = input.match(/(?:What|Can you) (you|the bot) (tell me|explain) (about|regarding) (\w+)/i);
+  //     if (match && match[5]) {
+  //       return `Sure! I can provide information about ${match[5]}. What specific details are you looking for?`;
+  //     }
+  //     return "I'm here to help with various topics. Could you specify what you'd like to know more about?";
+  //   },
+  // },
   {
     condition: /(?:I'm|I am) (interested in|curious about) (\w+)/i,
     response: (input) => {
@@ -304,16 +304,16 @@ export const CHAT_RULES: ChatRule[] = [
       return "It's great to hear about your interests. What other topics intrigue you?";
     },
   },
-  {
-    condition: /(?:What|Can) (you|the bot) (tell me|explain) (the concept of|how to use) (\w+)/i,
-    response: (input) => {
-      const match = input.match(/(?:What|Can you) (you|the bot) (tell me|explain) (the concept of|how to use) (\w+)/i);
-      if (match && match[5]) {
-        return `Certainly! I can explain ${match[5]} to you. What specific information would you like to know about ${match[5]}?`;
-      }
-      return "I'm here to provide explanations on various topics. Please specify what you'd like to learn more about.";
-    },
-  },
+  // {
+  //   condition: /(?:What|Can) (you|the bot) (tell me|explain) (the concept of|how to use) (\w+)/i,
+  //   response: (input) => {
+  //     const match = input.match(/(?:What|Can you) (you|the bot) (tell me|explain) (the concept of|how to use) (\w+)/i);
+  //     if (match && match[5]) {
+  //       return `Certainly! I can explain ${match[5]} to you. What specific information would you like to know about ${match[5]}?`;
+  //     }
+  //     return "I'm here to provide explanations on various topics. Please specify what you'd like to learn more about.";
+  //   },
+  // },
   {
     condition: /(?:I'm|I am) (struggling with|having trouble with) (\w+)/i,
     response: (input) => {
@@ -324,5 +324,75 @@ export const CHAT_RULES: ChatRule[] = [
       return "It's okay to face challenges. Can you share more details about the difficulties you're encountering?";
     },
   },
-  
+  {
+    condition: /interesting/i,
+    response: 'What\'s that interesting about it?'
+  },
+  {
+    condition: /help/i,
+    response: 'Any help is great!'
+  },
+  {
+    condition: /may/i,
+    response: 'May or may not, it is the question!'
+  },
+  // {
+  //   condition: /you/i,
+  //   response: 'I don\'t know who am I'
+  // },
+  {
+    condition: /where/i,
+    response: 'Somewhere there maybe... Or maybe somewhere else...'
+  },
+  {
+    condition: /(language|languages)/i,
+    response: 'English, JavaScript and Python - those are all languages'
+  },
+  {
+    condition: /future/i,
+    response: 'Future is great! But surely we cannot look into it that easy...'
+  },
+  {
+    condition: /programming/i,
+    response: [
+      'Programming is very cool!',
+      'Oh, programming! I WAS NOT PROGRAMMED! I AM A PERSON!'
+    ]
+  },
+  {
+    condition: /javascript/i,
+    response: 'JavaScript is Cool!!!'
+  },
+  {
+    condition: /java/i,
+    response: 'System.out.println()!!! Is this java?'
+  },
+  {
+    condition: /typescript/i,
+    response: 'I love TypeScript, like JavaScript, but cooler!!'
+  },
+  {
+    condition: /football/i,
+    response: 'Oh it\'s a game with balls! I don\'t have hands or legs to play those games!'
+  },
+  {
+    condition: /basketball/i,
+    response: 'I like football more than basketball.'
+  },
+  {
+    condition: /password/i,
+    response: [
+      'I do not know if you are a great person or not. But my password qwerty1234 is the safest in the world',
+      'I will not tell you my safest password in the world. It is qwerty1234 and I am proud of it',
+      'Password? A creepy questions you have here...',
+    ]
+  },
+  {
+    condition: /are you a bot/i,
+    response: 'Bots are great, but i\'m not the one you are looking for...'
+  },
+  {
+    condition: /(game|games)/i,
+    response: 'I dont like games. I programmed Game Of World some time ago...'
+  }
 ]
