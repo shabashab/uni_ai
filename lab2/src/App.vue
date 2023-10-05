@@ -1,19 +1,17 @@
 <script setup lang="ts">
-const { messages, sendMessage } = useChat();
+const { messages } = useChat();
 
 const newMessage = ref<string>("");
 
-const onNewMessageFromUserSent = () => {
-  sendMessage(newMessage.value);
-  newMessage.value = "";
-}
+const onGenerateButtonClick = () => {}
+
 </script>
 
 <template>
   <section id="chat_bg" class="w-full h-screen back-ground-gradient py-20">
     <div class="container bg-black/20 rounded-2xl py-4 px-8 text-white h-full flex flex-col justify-between gap-10">
       <ChatSection :messages="messages" />
-      <InputSection v-model:new-message="newMessage" @submit="onNewMessageFromUserSent" />
+      <InputSection v-model:new-message="newMessage" @submit="onGenerateButtonClick()" />
     </div>
   </section>
 </template>
