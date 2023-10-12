@@ -3,8 +3,18 @@ const { messages, sendMessage } = useChat();
 
 const newMessage = ref<string>("");
 
+const showButtons = ref<boolean>(false)
+
+const lastMessage = computed(() => messages.value[messages.value.length - 1]);
+
 const onNewMessageFromUserSent = () => {
+  if (showButtons.value) {
+    showButtons.value = false;
+  }
   sendMessage(newMessage.value);
+  if(typeof lastMessage.value.message === "object") {
+    showButtons.value = true;
+  }
   newMessage.value = "";
 }
 </script>
@@ -13,7 +23,7 @@ const onNewMessageFromUserSent = () => {
   <section id="chat_bg" class="w-full h-screen back-ground-gradient py-20">
     <div class="container bg-black/20 rounded-2xl py-4 px-8 text-white h-full flex flex-col justify-between gap-10">
       <ChatSection :messages="messages" />
-      <InputSection v-model:new-message="newMessage" @submit="onNewMessageFromUserSent" />
+      <InputSection v-model:new-message="newMessage" :show-buttons="showButtons" :buttons="lastMessage.message?.buttons ?? []" @submit="onNewMessageFromUserSent" />
     </div>
   </section>
 </template>

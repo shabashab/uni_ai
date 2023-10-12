@@ -3,7 +3,13 @@ import { Icon } from "@iconify/vue";
 
 const props = defineProps<{
   messages: readonly { 
-    message: string
+    message: string | {
+      text: string
+      buttons: {
+        label: string;
+        text: string;
+      }[]
+    }
     sender: "user" | "ai"
   }[]
 }>()
@@ -41,7 +47,7 @@ watch(props.messages, () => {
           />
         </div>
         <div>
-        {{ message.message }}
+        {{ typeof message.message === "string" ? message.message : message.message.text }}
         </div>
       </div>
       <div
