@@ -40,9 +40,9 @@ watch(props.messages, () => {
     >
       <div
         v-if="message.sender === 'ai'"
-        class="py-2 px-4 bg-violet-500/50 rounded-xl text-xl flex justify-start gap-5 items-center whitespace-pre-line max-w-[80%]"
+        class="py-2 px-4 bg-violet-500/50 rounded-xl text-xl grid grid-cols-[auto_1fr] gap-10 items-center whitespace-pre-line max-w-[80%]"
       >
-        <div class="bg-blue-900/50 rounded-full w-10 h-10 flex justify-center items-center">
+        <div class="bg-blue-900/50 rounded-full w-[50px] h-[50px] flex justify-center items-center">
           <Icon
             icon="streamline:computer-robot-cyborg-artificial-robotics-robot-intelligence-machine-technology-android"
           />
@@ -53,7 +53,7 @@ watch(props.messages, () => {
       </div>
       <div
         v-if="message.sender === 'user'"
-        class="py-2 px-4 bg-pink-500/60 rounded-xl text-xl flex justify-start gap-5 items-center"
+        class="py-2 px-4 bg-pink-500/60 rounded-xl text-xl grid grid-cols-[1fr_auto] gap-5 items-center"
       >
         <div>
         {{ message.message }}
