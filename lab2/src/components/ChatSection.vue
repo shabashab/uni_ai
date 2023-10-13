@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
+import {DeepReadonly} from 'vue'
 
 const props = defineProps<{
-  messages: readonly { 
+  messages: DeepReadonly<{ 
     message: string | {
       text: string
       buttons: {
@@ -11,7 +12,7 @@ const props = defineProps<{
       }[]
     }
     sender: "user" | "ai"
-  }[]
+  }[]>
 }>()
 
 const chatComponent = ref<HTMLDivElement>();
@@ -39,7 +40,7 @@ watch(props.messages, () => {
     >
       <div
         v-if="message.sender === 'ai'"
-        class="py-2 px-4 bg-violet-500/50 rounded-xl text-xl flex justify-start gap-5 items-center"
+        class="py-2 px-4 bg-violet-500/50 rounded-xl text-xl flex justify-start gap-5 items-center whitespace-pre-line max-w-[80%]"
       >
         <div class="bg-blue-900/50 rounded-full w-10 h-10 flex justify-center items-center">
           <Icon

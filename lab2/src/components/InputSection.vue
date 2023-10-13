@@ -4,7 +4,7 @@ import { Icon } from "@iconify/vue";
 const props = defineProps<{
   newMessage: string;
   showButtons: boolean;
-  buttons: {
+  buttons: readonly {
     label: string;
     text: string;
   }[]
@@ -20,6 +20,11 @@ const newMessageValue = computed({
     emit("update:newMessage", value)
   }
 })
+
+const onButtonClick = (text: string) => {
+  newMessageValue.value = text
+  emit('submit')
+}
 </script>
 
 <template>
@@ -33,12 +38,10 @@ const newMessageValue = computed({
         <Icon icon="tabler:send"></Icon>
       </button>
     </template>
-    <template v-else>
-      <div class="flex justify-between gap-10">
-        <button v-for="button in props.buttons" class="bg-green-500/90 rounded-xl w-20 flex items-center justify-center text-3xl font-bold hover:cursor-pointer" @click="newMessageValue = button.text">
-          {{ button.label }}
-        </button>
-      </div>
-    </template>
+    <div class="grid auto-cols-fr gap-4 grid-flow-col w-full" v-else>
+      <button v-for="button in props.buttons" class="bg-green-500/90 rounded-xl flex items-center justify-center text-2xl font-bold hover:cursor-pointer hover:bg-green-600/90" @click="onButtonClick(button.text)">
+        {{ button.label }}
+      </button>
+    </div>
   </div>
 </template>
