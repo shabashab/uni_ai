@@ -299,6 +299,7 @@
     "watchTriggerable": true,
     "watchWithFilter": true,
     "whenever": true,
-    "createText": true
+    "createText": true,
+    "generateText": true
   }
 }
