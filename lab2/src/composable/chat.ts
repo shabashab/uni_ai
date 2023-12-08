@@ -2,13 +2,21 @@ import { CHAT_RULES } from "../config/chat-rules"
 
 type ChatSender = 'user' | 'ai'
 
+type ChatMessageContent = string | {
+  text: string
+  buttons: {
+    label: string;
+    text: string;
+  }[]
+}
+
 type ChatMessage = {
-  message: string
+  message: ChatMessageContent
   sender: ChatSender
 }
 
 export type ChatRuleCondition = ((input: string) => boolean) | RegExp
-export type ChatRuleResponder = ((input: string) => string ) | string
+export type ChatRuleResponder = ((input: string) => ChatMessageContent) | ChatMessageContent
 
 export type ChatRule = {
   condition: ChatRuleCondition,
@@ -30,12 +38,12 @@ const matchRuleCondition = (message: string, condition: ChatRuleCondition): bool
   return Boolean(message.match(condition))
 }
 
-const getResponseForChatRuleResponder = (message: string, responder: ChatRuleResponder): string => {
-  if(typeof responder === 'string') return responder
+const getResponseForChatRuleResponder = (message: string, responder: ChatRuleResponder): ChatMessageContent => {
+  if(typeof responder === 'string' || typeof responder === 'object') return responder
   return responder(message)
 }
 
-const getResponseForChatRule = (message: string, chatRule: ChatRule): string => {
+const getResponseForChatRule = (message: string, chatRule: ChatRule): ChatMessageContent => {
   if(!Array.isArray(chatRule.response)) 
     return getResponseForChatRuleResponder(message, chatRule.response)
 

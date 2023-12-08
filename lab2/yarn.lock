@@ -354,6 +354,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:^4.14.199":
+  version: 4.14.199
+  resolution: "@types/lodash@npm:4.14.199"
+  checksum: e68d1fcbbfce953ed87b296a628573f62939227bcda0c934954e862b421e8a34c5e71cad6fea27b9980567909e6a4698f09025692958e36d64ea9ed99ec6fb2e
+  languageName: node
+  linkType: hard
+
 "@types/web-bluetooth@npm:^0.0.17":
   version: 0.0.17
   resolution: "@types/web-bluetooth@npm:0.0.17"
@@ -1482,9 +1489,11 @@ __metadata:
   resolution: "lab1@workspace:."
   dependencies:
     "@iconify/vue": ^4.1.1
+    "@types/lodash": ^4.14.199
     "@vitejs/plugin-vue": ^4.2.3
     "@vueuse/core": ^10.4.1
     autoprefixer: ^10.4.16
+    lodash: ^4.17.21
     postcss: ^8.4.30
     tailwindcss: ^3.3.3
     typescript: ^5.0.2
@@ -1514,6 +1523,13 @@ __metadata:
   version: 0.4.3
   resolution: "local-pkg@npm:0.4.3"
   checksum: 7825aca531dd6afa3a3712a0208697aa4a5cd009065f32e3fb732aafcc42ed11f277b5ac67229222e96f4def55197171cdf3d5522d0381b489d2e5547b407d55
+  languageName: node
+  linkType: hard
+
+"lodash@npm:^4.17.21":
+  version: 4.17.21
+  resolution: "lodash@npm:4.17.21"
+  checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
   languageName: node
   linkType: hard
 

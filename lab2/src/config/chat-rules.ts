@@ -1,5 +1,10 @@
 import { ChatRule } from "../composable/chat";
 
+import andersenInput from '../assets/input_andersen.json'
+import novelInput from '../assets/input_novel.json'
+
+import { createText } from "../composable/create-text";
+
 export const CHAT_RULES: ChatRule[] = [
   // {
   //   condition: (input) => input.endsWith('?'),
@@ -394,5 +399,29 @@ export const CHAT_RULES: ChatRule[] = [
   {
     condition: /(game|games)/i,
     response: 'I dont like games. I programmed Game Of World some time ago...'
-  }
+  },
+  {
+    condition: /write me/i,
+    response: {
+      text: 'What kind of text do you want me to write?',
+      buttons: [
+        {
+          label: 'A fairy tale',
+          text: 'Write a fairy tale for me'
+        },
+        {
+          label: 'A novel',
+          text: 'Write a novel for me'
+        },
+      ]
+    },
+  },
+  {
+    condition: /write a fairy tale for me/i,
+    response: () => createText(andersenInput)
+  },
+  {
+    condition: /write a novel for me/i,
+    response: () => createText(novelInput)
+  },
 ]

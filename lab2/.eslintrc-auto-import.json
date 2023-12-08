@@ -298,6 +298,8 @@
     "watchThrottled": true,
     "watchTriggerable": true,
     "watchWithFilter": true,
-    "whenever": true
+    "whenever": true,
+    "createText": true,
+    "generateText": true
   }
 }
