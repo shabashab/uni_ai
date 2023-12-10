@@ -34,19 +34,19 @@ const stages = ref<Stage[]>([
     type: "buttons",
     buttons: [
       {
-        label: "5",
+        label: "5 років",
         value: 5
       },
       {
-        label: "18",
+        label: "18 років",
         value: 18
       },
       {
-        label: "35",
+        label: "35 років",
         value: 35
       },
       {
-        label: "50",
+        label: "50 років",
         value: 50
       }
     ]
@@ -56,11 +56,11 @@ const stages = ref<Stage[]>([
     type: "buttons",
     buttons: [
       {
-        label: "Добрий",
+        label: "Добрий сюжет",
         value: "good"
       },
       {
-        label: "Злий",
+        label: "Злий сюжет",
         value: "bad"
       }
     ]
@@ -70,11 +70,11 @@ const stages = ref<Stage[]>([
     type: "buttons",
     buttons: [
       {
-        label: "Смішна",
+        label: "Смішна кінцівка",
         value: "funny"
       },
       {
-        label: "повчальна",
+        label: "Повчальна кінцівка",
         value: "instructive"
       }
     ]

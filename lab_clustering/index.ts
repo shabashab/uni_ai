@@ -77,6 +77,7 @@ const mergeTwoClustersWithMinDistance = (clusters: number[][], points: Point[]) 
 const getClustersByDendrites = (cluster: number[][], points: Point[]) => {
   while (cluster.length > 3) {
     cluster = mergeTwoClustersWithMinDistance(cluster, points);
+    console.log(cluster);
   }
 
   return cluster;
@@ -106,17 +107,61 @@ const getMaxDistaceIndex = (distances: number[]) => {
   return maxDistanceIndex;
 }
 
+const displayDistances = (distances: number[][]) => {
+  for (let i = 0; i < distances.length; i++) {
+    const distancesRow = distances[i];
+    // console.log(`[${i + 1}]`);
+    const row = distancesRow.map((el) => el.toFixed(2)).join(' ');
+    console.log(row);
+  }
+}
 
-const getClusters = (distances: number[][], getIndexFunction: (distancesRow: number[]) => number): number[][] => {
-  const clusters = [] as number[][];
+const isInOneCluster = (clusters: number[][], index1: number, index2: number) => {
+  return clusters.some((el) => el.includes(index1) && el.includes(index2));
+}
+
+const mergeTwoClusters = (clusters: number[][], index1: number, index2: number) => {
+  const clusterIndex1 = clusters.findIndex((el) => el.includes(index1));
+  const clusterIndex2 = clusters.findIndex((el) => el.includes(index2));
+
+  if (clusterIndex1 === clusterIndex2) {
+    return clusters;
+  }
+
+  const mergedCluster = clusters[clusterIndex1].concat(clusters[clusterIndex2]);
+  clusters = clusters.filter((el, index) => index !== clusterIndex1 && index !== clusterIndex2);
+  clusters.push(mergedCluster);
+
+  return clusters;
+
+}
+
+const getClusters = (distances: number[][], getIndexFunction: (distancesRow: number[]) => number): {clusters: number[][], meta: {distance: number, from: number, to:number}[]} => {
+
+  let clusters = [] as number[][];
+  const meta = [] as {distance: number, from: number, to:number}[];
+
+  displayDistances(distances);
 
   for (let i = 0; i < distances.length; i++) {
     const distancesRow = distances[i];
     const newDistanceIndex = getIndexFunction(distancesRow);
+
+    meta.push({distance: distancesRow[newDistanceIndex], from: i + 1, to: newDistanceIndex + 1})
+
+    if(clusters.some((el) => el.includes(i)) && clusters.some((el) => el.includes(newDistanceIndex))) {
+      if (isInOneCluster(clusters, i, newDistanceIndex)) {
+        continue;
+      }
+
+      clusters = mergeTwoClusters(clusters, i, newDistanceIndex);
+      continue;
+    }
     
     if (clusters.some((el) => el.includes(newDistanceIndex))) {
       const clusterIndex = clusters.findIndex((el) => el.includes(newDistanceIndex));
-  
+
+
       if (clusters[clusterIndex].includes(i)) {
         continue;
       } else {
@@ -137,27 +182,33 @@ const getClusters = (distances: number[][], getIndexFunction: (distancesRow: num
     }
   }
 
-  return clusters;
+  return {clusters, meta};
 }
 
-const x1 = [119.4, 121.0, 16.6, 114.2, 115.8, 15.2, 17.9, 117.5];
-const x2 = [16.6, 18.1, 15.5, 19.4, 23.2, 16.7, 15.7, 15.2];
-
-console.log(`Clustering by closest neighbor:`);
-console.log(getClusters(getDistances(generatePoints(x1, x2), calculateDistanceEvclide), getMinDistanceIndex))
+// const x1 = [119.4, 121.0, 16.6, 114.2, 115.8, 15.2, 17.9, 117.5];
+// const x2 = [16.6, 18.1, 15.5, 19.4, 23.2, 16.7, 15.7, 15.2];
 
 
 const x3 = [121.4, 123.0, 18.6, 116.2, 117.8, 17.2, 19.9, 119.5];
 const x4 = [18.6, 10.1, 17.5, 11.4, 15.2, 18.7, 17.7, 17.2];
 
+console.log(`Clustering by closest neighbor:`);
+const clustersMinDistance = getClusters(getDistances(generatePoints(x3, x4), calculateDistanceEvclide), getMinDistanceIndex);
+console.log({clusters: clustersMinDistance.clusters, meta: clustersMinDistance.meta});
+
+
 console.log(`\n\nClustering by farthest neighbor:`);
-console.log(getClusters(getDistances(generatePoints(x3,x4), calculateDistanceCityBlock), getMinDistanceIndex))
+const clustersMaxDistance = getClusters(getDistances(generatePoints(x3, x4), calculateDistanceEvclide), getMaxDistaceIndex);
+console.log({clusters: clustersMaxDistance.clusters, meta: clustersMaxDistance.meta});
+
+// console.log(`\n\nClustering by farthest neighbor:`);
+// console.log(getClusters(getDistances(generatePoints(x3,x4), calculateDistanceCityBlock), getMaxDistaceIndex))
 
 
-const x5 = [113.2, 110.2, 113.7, 110.6, 19.1, 125.8, 113.2, 110.2];
-const x6 = [24.2, 29.6, 26.6, 20.1, 12.1, 24.1, 24.2, 29.6];
+// const x5 = [113.2, 110.2, 113.7, 110.6, 19.1, 125.8, 113.2, 110.2];
+// const x6 = [24.2, 29.6, 26.6, 20.1, 12.1, 24.1, 24.2, 29.6];
 
-console.log(`\n\nClustering by dendrites:`);
-const pointsForDendrites = generatePoints(x5, x6);
-const dendritesPoints = pointsForDendrites.map((el, index) => ([index]));
-console.log(getClustersByDendrites(dendritesPoints, pointsForDendrites));
+// console.log(`\n\nClustering by dendrites:`);
+// const pointsForDendrites = generatePoints(x3, x4);
+// const dendritesPoints = pointsForDendrites.map((el, index) => ([index]));
+// console.log(getClustersByDendrites(dendritesPoints, pointsForDendrites));

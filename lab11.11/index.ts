@@ -73,7 +73,7 @@ for (let lambda = 1; lambda <= 10; lambda++) {
 
 console.log(`\n\n---------------------\n\n`);
 
-for (let lambda = 1; lambda <= 10; lambda++) {
+for (let lambda = 0; lambda <= 10; lambda++) {
   const output = simulateStreamWithTime(lambda, OPARATION_FOR_LAMBDA);
   // console.log(`Stream ${stream}`);
 
