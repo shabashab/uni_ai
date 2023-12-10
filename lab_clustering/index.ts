@@ -1,3 +1,5 @@
+// import { plot } from 'nodeplotlib'
+
 interface Point {
   x: number;
   y: number;
@@ -187,7 +189,37 @@ const getClusters = (distances: number[][], getIndexFunction: (distancesRow: num
 
 // const x1 = [119.4, 121.0, 16.6, 114.2, 115.8, 15.2, 17.9, 117.5];
 // const x2 = [16.6, 18.1, 15.5, 19.4, 23.2, 16.7, 15.7, 15.2];
+const linearRegression = (x: number[], y: number[]) => {
+  let n = x.length;
+  let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
 
+  for (let i = 0; i < n; i++) {
+      sumX += x[i];
+      sumY += y[i];
+      sumXY += x[i] * y[i];
+      sumXX += x[i] * x[i];
+  }
+
+  let a = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+  let b = (sumY - a * sumX) / n;
+
+  return { a, b };
+}
+
+
+const x1 = [119.4, 121.0, 16.6, 114.2, 115.8, 15.2, 17.9, 117.5];
+const x2 = [16.6, 18.1, 15.5, 19.4, 23.2, 16.7, 15.7, 15.2];
+
+console.log(`Clustering by closest neighbor:`);
+console.log(getClusters(getDistances(generatePoints(x1, x2), calculateDistanceEvclide), getMinDistanceIndex))
+
+// plot([
+//   {
+//     x: x1,
+//     y: x2,
+//     mode: 'markers',
+//   }
+// ])
 
 const x3 = [121.4, 123.0, 18.6, 116.2, 117.8, 17.2, 19.9, 119.5];
 const x4 = [18.6, 10.1, 17.5, 11.4, 15.2, 18.7, 17.7, 17.2];
@@ -204,6 +236,15 @@ console.log({clusters: clustersMaxDistance.clusters, meta: clustersMaxDistance.m
 // console.log(`\n\nClustering by farthest neighbor:`);
 // console.log(getClusters(getDistances(generatePoints(x3,x4), calculateDistanceCityBlock), getMaxDistaceIndex))
 
+// plot([
+//   {
+//     x: x3,
+//     y: x4,
+//     mode: 'markers',
+//   }
+// ])
+
+
 
 // const x5 = [113.2, 110.2, 113.7, 110.6, 19.1, 125.8, 113.2, 110.2];
 // const x6 = [24.2, 29.6, 26.6, 20.1, 12.1, 24.1, 24.2, 29.6];
@@ -212,3 +253,50 @@ console.log({clusters: clustersMaxDistance.clusters, meta: clustersMaxDistance.m
 // const pointsForDendrites = generatePoints(x3, x4);
 // const dendritesPoints = pointsForDendrites.map((el, index) => ([index]));
 // console.log(getClustersByDendrites(dendritesPoints, pointsForDendrites));
+// const { a, b } = linearRegression(x5, x6)
+
+// plot([
+//   {
+//     x: x1,
+//     y: x2,
+//     mode: 'markers',
+//   },
+//   {
+//     x: [Math.min(...x1), Math.max(...x1)],
+//     y: [(a * (Math.min(...x1)) + b), (a * (Math.max(...x1)) + b)],
+//     mode: 'lines'
+//   }
+// ])
+
+// plot([
+//   {
+//     x: x3,
+//     y: x4,
+//     mode: 'markers',
+//   },
+//   {
+//     x: [Math.min(...x3), Math.max(...x3)],
+//     y: [(a * (Math.min(...x3)) + b), (a * (Math.max(...x3)) + b)],
+//     mode: 'lines'
+//   }
+// ])
+
+
+
+// plot([
+//   {
+//     x: x5,
+//     y: x6,
+//     mode: 'markers',
+//   },
+//   {
+//     x: [Math.min(...x5), Math.max(...x5)],
+//     y: [(a * (Math.min(...x5)) + b), (a * (Math.max(...x5)) + b)],
+//     mode: 'lines'
+//   }
+// ])
+
+console.log(`\n\nClustering by dendrites:`);
+const pointsForDendrites = generatePoints(x5, x6);
+const dendritesPoints = pointsForDendrites.map((el, index) => ([index]));
+console.log(getClustersByDendrites(dendritesPoints, pointsForDendrites));
